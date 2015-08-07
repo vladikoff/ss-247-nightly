@@ -15,7 +15,17 @@ selenium.install({
   selenium.start({
     version: '2.47.1',
   }, function(err, cp) {
-    if (err) throw err;
+    process.on('exit', function(code) {
+      cp.kill();
+    });
+
+    if (err) {
+      if (err.message && err.message === 'Another Selenium process is already running') {
+        console.log('Did not start Selenium, already running..');
+      } else {
+        throw err
+      }
+    };
 
 
       var opts = {
