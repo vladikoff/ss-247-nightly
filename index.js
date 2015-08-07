@@ -12,11 +12,12 @@ selenium.install({
   version: '2.47.1',
 }, function() {
 
-  selenium.start(function(err, cp) {
+  selenium.start({
+    version: '2.47.1',
+  }, function(err, cp) {
     if (err) throw err;
 
 
-    profile(function (profile) {
       var opts = {
         desiredCapabilities: {
           //loggingPrefs: {"driver": "ALL", "server": "ALL", "browser": "ALL", "client": "ALL"},
@@ -37,7 +38,6 @@ selenium.install({
             .init()
             .url('about:accounts')
       }, 3000);
-    });
 
     tailLogs();
 
